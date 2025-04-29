@@ -2,8 +2,97 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="travelPlaner.MainWindow"
         Title="travelPlaner">
-    Welcome to Avalonia!
+    
+        <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Planer podróży" Margin="10" HorizontalAlignment="Center"/>
+                
+                <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="imie: " Margin="10"/>
+                        <TextBox x:Name="nameTextBox" Width="100"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 0 ">
+                        <TextBlock Text="państwo: " Margin="10"/>
+                        <ComboBox>
+                                <ComboBoxItem>Francja</ComboBoxItem>
+                                <ComboBoxItem>Hiszpania</ComboBoxItem>
+                                <ComboBoxItem>Stany Zjednoczone</ComboBoxItem>
+                                <ComboBoxItem>Chiny</ComboBoxItem>
+                                <ComboBoxItem>Włochy</ComboBoxItem>
+                                <ComboBoxItem>Turcja</ComboBoxItem>
+                                <ComboBoxItem>Meksyk</ComboBoxItem>
+                                <ComboBoxItem>Chorwacja</ComboBoxItem>
+                                <ComboBoxItem>Japonia</ComboBoxItem>
+                                <ComboBoxItem>Australia</ComboBoxItem>
+                                <ComboBoxItem>Grecja</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <StackPanel Orientation="Vertical" Margin="10">
+                                <TextBlock Text="Miasta do odwiedzienia"/>
+                                <TextBox x:Name="CityTextBox"/>
+                                <Button x:Name="AddCityButton" Click="AddCityButton_OnClick"> Dodaj miasto</Button>
+                                <ListBox x:Name="citiesListBox" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <ListBox.Items>
+                                                
+                                        </ListBox.Items>
+                                </ListBox>
+                                
+                        </StackPanel>
+                        
+                        <TextBlock Text="Cel podróży: " Margin="20 10 0 0"/> 
+                        
+                        <Grid ShowGridLines="True">
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Restauracje: " Margin="10" HorizontalAlignment="Right"/>
+                                <CheckBox Grid.Row="0" Grid.Column="1" Margin="10 5 0 10" x:Name="FirstCheckBox"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Muzea: " Margin="10" HorizontalAlignment="Right"/>
+                                <CheckBox Grid.Row="1" Grid.Column="1" Margin="10 5 0 10" x:Name="SecondCheckBox"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Zabytki: " Margin="10" HorizontalAlignment="Right"/>
+                                <CheckBox Grid.Row="2" Grid.Column="1" Margin="10 5 0 10" x:Name="ThirdCheckBox"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Parki Narodowe: " Margin="10" HorizontalAlignment="Right"/>
+                                <CheckBox Grid.Row="3" Grid.Column="1" Margin="10 5 0 10" x:Name="FourthCheckBox"/>
+
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Imprezowanie: " Margin="10" HorizontalAlignment="Right"/>
+                                <CheckBox Grid.Row="4" Grid.Column="1" Margin="10 5 0 10" x:Name="FifthCheckBox"/>
+                                
+                        </Grid>
+                        
+                        
+                        
+                </StackPanel>
+                
+                
+                
+                <TextBlock Text="Sposób transportu"/>
+                <RadioButton Content="Samolot" GroupName="transportType" IsChecked="True"/>
+                <RadioButton Content="Pociąg" GroupName="transportType"/>
+                <RadioButton Content="Autobus" GroupName="transportType"/>
+                <RadioButton Content="Prom" GroupName="transportType"/>
+                
+                
+                
+                
+        </StackPanel>
+        
+        
+        
 </Window>

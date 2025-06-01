@@ -16,18 +16,11 @@
                 
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0 ">
                         <TextBlock Text="państwo: " Margin="10"/>
-                        <ComboBox>
-                                <ComboBoxItem>Francja</ComboBoxItem>
-                                <ComboBoxItem>Hiszpania</ComboBoxItem>
-                                <ComboBoxItem>Stany Zjednoczone</ComboBoxItem>
-                                <ComboBoxItem>Chiny</ComboBoxItem>
-                                <ComboBoxItem>Włochy</ComboBoxItem>
-                                <ComboBoxItem>Turcja</ComboBoxItem>
-                                <ComboBoxItem>Meksyk</ComboBoxItem>
-                                <ComboBoxItem>Chorwacja</ComboBoxItem>
-                                <ComboBoxItem>Japonia</ComboBoxItem>
-                                <ComboBoxItem>Australia</ComboBoxItem>
-                                <ComboBoxItem>Grecja</ComboBoxItem>
+                        <ComboBox x:Name="CountryComboBox">
+                                <ComboBoxItem Content="Włochy"/>
+                                <ComboBoxItem Content="Japonia"/>
+                                <ComboBoxItem Content="Francja"/>
+                                <ComboBoxItem Content="Australia"/>
                         </ComboBox>
                         
                         <StackPanel Orientation="Vertical" Margin="10">
@@ -83,19 +76,18 @@
                 
                 
                 <TextBlock Text="Sposób transportu"/>
-                <RadioButton Content="Samolot" GroupName="transportType" IsChecked="True"/>
-                <RadioButton Content="Pociąg" GroupName="transportType"/>
-                <RadioButton Content="Autobus" GroupName="transportType"/>
-                <RadioButton Content="Prom" GroupName="transportType"/>
+                <RadioButton x:Name="PlaneRadio" Content="Samolot" GroupName="transportType" IsChecked="True"/>
+                <RadioButton x:Name="TrainRadio" Content="Pociąg" GroupName="transportType"/>
+                <RadioButton x:Name="BusRadio" Content="Autobus" GroupName="transportType"/>
+                <RadioButton x:Name="FerryRadio" Content="Prom" GroupName="transportType"/>
                 
                 <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Start podróży" />
                         <CalendarDatePicker x:Name="StartDateOfTravel" Margin="10" Padding="10" Width="200"
-                                            SelectedDateChanged="EndDateOfTravel_OnSelectedDateChanged"
                         />
                         
                         </StackPanel>
-                
+                <Button x:Name="FinishPlanButton" Click="FinishPlanButton_OnClick">Zakończ planowanie</Button>
                 
         </StackPanel>
         

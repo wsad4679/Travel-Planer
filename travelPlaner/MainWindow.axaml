@@ -34,8 +34,8 @@
                                 <TextBlock Text="Miasta do odwiedzienia"/>
                                 <TextBox x:Name="CityTextBox"/>
                                 <Button x:Name="AddCityButton" Click="AddCityButton_OnClick"> Dodaj miasto</Button>
-                                <ListBox x:Name="citiesListBox" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <ListBox.Items>
+                                <ListBox x:Name="CitiesListBox" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <ListBox.Items >
                                                 
                                         </ListBox.Items>
                                 </ListBox>
@@ -60,7 +60,7 @@
                                 
                                 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Restauracje: " Margin="10" HorizontalAlignment="Right"/>
-                                <CheckBox Grid.Row="0" Grid.Column="1" Margin="10 5 0 10" x:Name="FirstCheckBox"/>
+                                <CheckBox Grid.Row="0" Grid.Column="1"  Margin="10 5 0 10" x:Name="FirstCheckBox" />
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Muzea: " Margin="10" HorizontalAlignment="Right"/>
                                 <CheckBox Grid.Row="1" Grid.Column="1" Margin="10 5 0 10" x:Name="SecondCheckBox"/>
@@ -88,7 +88,13 @@
                 <RadioButton Content="Autobus" GroupName="transportType"/>
                 <RadioButton Content="Prom" GroupName="transportType"/>
                 
-                
+                <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Start podróży" />
+                        <CalendarDatePicker x:Name="StartDateOfTravel" Margin="10" Padding="10" Width="200"
+                                            SelectedDateChanged="EndDateOfTravel_OnSelectedDateChanged"
+                        />
+                        
+                        </StackPanel>
                 
                 
         </StackPanel>

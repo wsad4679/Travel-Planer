@@ -38,9 +38,9 @@ public partial class MainWindow : Window
         DateTime? startDateTime = StartDateOfTravel.SelectedDate;
         string startDate = startDateTime?.ToShortDateString();
         string selectedTransport = "";
+        var summaryTravel = "Dane podróży: \n";
         
         List<string> selectedOptions = new List<string>();
-        List<string> cityNames = new List<string>();
 
         if (FirstCheckBox.IsChecked == true)
             selectedOptions.Add("Restauracje");
@@ -56,15 +56,13 @@ public partial class MainWindow : Window
 
         if (FifthCheckBox.IsChecked == true)
             selectedOptions.Add("Imprezowanie");
-        
-        
-        foreach (var item in CitiesListBox.Items)
+        else
         {
-            if (item is Label label && label.Content is string cityName)
-            {
-                cityNames.Add(cityName);
-            }
+            selectedOptions.Add("Bez pomysłu");
         }
+        
+        
+        
         
 
         if (PlaneRadio.IsChecked == true)
@@ -75,10 +73,33 @@ public partial class MainWindow : Window
             selectedTransport = BusRadio.Content.ToString();
         else if (FerryRadio.IsChecked == true)
             selectedTransport = FerryRadio.Content.ToString();
-        
-        
 
-        
+       
+        summaryTravel += $"Imie: {name}\n";
+        summaryTravel += $"Wybrane państwo {country}\n";
+        summaryTravel += $"Środek transportu: {selectedTransport}\n";
+        summaryTravel += $"Rozpoczęcie podróży: {selectedTransport}\n";
+        summaryTravel += "Miasta do odwiedzenia: ";
+        foreach (var item in CitiesListBox.Items)
+        {
+            
+            if (item is Label label && label.Content is string cityName)
+            {
+                summaryTravel += $"{cityName}, ";
+            }
+        }
+        summaryTravel += "\nRzeczy do zwiedzenia: ";
+    
+        foreach (var item in selectedOptions)
+        {
+            summaryTravel += $"{item}, ";
+            
+        }
+
+        summaryTravel += $"\nRozpoczęcie podróży {startDate}";
+        var popupWindow = new SummaryWindow(summaryTravel);
+        popupWindow.Show();
+
     }
     
     

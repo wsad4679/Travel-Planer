@@ -5,12 +5,14 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
 namespace travelPlaner;
 
 public partial class MainWindow : Window
 {
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -31,6 +33,9 @@ public partial class MainWindow : Window
 
     }
 
+    
+    
+    
 
 
     private void FinishPlanButton_OnClick(object? sender, RoutedEventArgs e)
@@ -44,6 +49,17 @@ public partial class MainWindow : Window
             "Australia" => 5000,
             _ => 1000 // domyślna cena
         };
+    
+        string imagePath =  country switch
+        {
+            "Francja" => "avares://travelPlaner/Assets/francja.png",
+            "Japonia" => "avares://travelPlaner/Assets/japonia.png",
+            "Grecja" => "avares://travelPlaner/Assets/grecja.png",
+            "Australia" => "avares://travelPlaner/Assets/australia.png",
+            _ => "avares://travelPlaner/Assets/default.png"
+        };
+        
+        
         
         
         var name = nameTextBox.Text;
@@ -140,7 +156,7 @@ public partial class MainWindow : Window
 
         summaryTravel += $"\nRozpoczęcie podróży {startDate}\n";
         summaryTravel += $"Koszt podróży: {travelPrice}\n";
-        var popupWindow = new SummaryWindow(summaryTravel);
+        var popupWindow = new SummaryWindow(summaryTravel, imagePath);
         popupWindow.Show();
         
         var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -160,8 +176,21 @@ public partial class MainWindow : Window
         
 
     }
-    
-    
 
-        
+
+    private void CountryComboBox_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        var country = (CountryComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+        string imagePath =  country switch
+        {
+            "Francja" => "avares://travelPlaner/Assets/francja.png",
+            "Japonia" => "avares://travelPlaner/Assets/japonia.png",
+            "Grecja" => "avares://travelPlaner/Assets/grecja.png",
+            "Australia" => "avares://travelPlaner/Assets/australia.png",
+            _ => "avares://travelPlaner/Assets/default.png"
+        };
+        var uri = new Uri(imagePath);
+        using var stream = AssetLoader.Open(uri);
+        CountryImage.Source = new Bitmap(stream);
+    }
 }

@@ -16,7 +16,7 @@
                 
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0 ">
                         <TextBlock Text="państwo: " Margin="10"/>
-                        <ComboBox x:Name="CountryComboBox">
+                        <ComboBox x:Name="CountryComboBox" SelectionChanged="CountryComboBox_OnSelectionChanged">
                                 <ComboBoxItem Content="Włochy"/>
                                 <ComboBoxItem Content="Japonia"/>
                                 <ComboBoxItem Content="Francja"/>
@@ -88,6 +88,7 @@
                         
                         </StackPanel>
                 <Button x:Name="FinishPlanButton" Click="FinishPlanButton_OnClick">Zakończ planowanie</Button>
+                <Image x:Name="CountryImage" Width="200" Height="200" Stretch="Uniform" Margin="20"/>
                 
         </StackPanel>
         

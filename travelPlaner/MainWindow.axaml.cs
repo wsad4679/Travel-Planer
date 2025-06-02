@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
+using Avalonia.Platform;
 
 namespace travelPlaner;
 
@@ -34,6 +36,16 @@ public partial class MainWindow : Window
     private void FinishPlanButton_OnClick(object? sender, RoutedEventArgs e)
     {
         var country = (CountryComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+        int travelPrice = country switch
+        {
+            "Francja" => 1200,
+            "Japonia" => 4000,
+            "Grecja" => 1500,
+            "Australia" => 5000,
+            _ => 1000 // domyślna cena
+        };
+        
+        
         var name = nameTextBox.Text;
         DateTime? startDateTime = StartDateOfTravel.SelectedDate;
         string startDate = startDateTime?.ToShortDateString();
@@ -43,19 +55,37 @@ public partial class MainWindow : Window
         List<string> selectedOptions = new List<string>();
 
         if (FirstCheckBox.IsChecked == true)
+        {
             selectedOptions.Add("Restauracje");
+            travelPrice += 320;
+        }
+        
+        if (SecondCheckBox.IsChecked == true) 
+        {
+                selectedOptions.Add("Muzea");
+                travelPrice +=100 ; }
 
-        if (SecondCheckBox.IsChecked == true)
-            selectedOptions.Add("Muzea");
 
         if (ThirdCheckBox.IsChecked == true)
-            selectedOptions.Add("Zabytki");
+        {
+                selectedOptions.Add("Zabytki");
+                travelPrice += 60;
+        }
+
 
         if (FourthCheckBox.IsChecked == true)
-            selectedOptions.Add("Parki Narodowe");
+        {
+                selectedOptions.Add("Parki Narodowe");
+                travelPrice += 40;
+        }
+
 
         if (FifthCheckBox.IsChecked == true)
-            selectedOptions.Add("Imprezowanie");
+        {
+                selectedOptions.Add("Imprezowanie");
+                travelPrice += 1000;
+        }
+            
         else
         {
             selectedOptions.Add("Bez pomysłu");
@@ -66,13 +96,25 @@ public partial class MainWindow : Window
         
 
         if (PlaneRadio.IsChecked == true)
+        {
             selectedTransport = PlaneRadio.Content.ToString();
+            travelPrice += 800;
+        }
         else if (TrainRadio.IsChecked == true)
+        {
             selectedTransport = TrainRadio.Content.ToString();
+            travelPrice += 400;
+        }
         else if (BusRadio.IsChecked == true)
+        {
             selectedTransport = BusRadio.Content.ToString();
+            travelPrice += 200;
+        }
         else if (FerryRadio.IsChecked == true)
+        {
             selectedTransport = FerryRadio.Content.ToString();
+            travelPrice += 300;
+        }
 
        
         summaryTravel += $"Imie: {name}\n";
@@ -96,9 +138,26 @@ public partial class MainWindow : Window
             
         }
 
-        summaryTravel += $"\nRozpoczęcie podróży {startDate}";
+        summaryTravel += $"\nRozpoczęcie podróży {startDate}\n";
+        summaryTravel += $"Koszt podróży: {travelPrice}\n";
         var popupWindow = new SummaryWindow(summaryTravel);
         popupWindow.Show();
+        
+        var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+// Pełna ścieżka do pliku
+        var filePath = Path.Combine(desktopPath, "travelPlan.txt");
+
+// Jeśli plik nie istnieje – utwórz go
+        if (!File.Exists(filePath))
+        {
+            File.Create(filePath).Dispose(); 
+        }
+        
+        using var writer = new StreamWriter(filePath); 
+        writer.WriteLine(summaryTravel);
+       
+        
 
     }
     

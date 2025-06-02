@@ -1,7 +1,8 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace travelPlaner;
 
@@ -10,26 +11,22 @@ public partial class SummaryWindow : Window
     public SummaryWindow(string summaryText, string imagePath)
     {
         InitializeComponent();
-        
-        
-        SummaryStackPanel.Children.Add(new TextBlock
-        {
-            Text = summaryText,
-            TextWrapping = Avalonia.Media.TextWrapping.Wrap
-        });
-        
-        
-        var uri = new Uri(imagePath);
-        using var stream = Avalonia.Platform.AssetLoader.Open(uri);
-        var bitmap = new Avalonia.Media.Imaging.Bitmap(stream);
 
-        SummaryStackPanel.Children.Add(new Avalonia.Controls.Image
+        var textBlock = this.FindControl<TextBlock>("SummaryTextBlock");
+        var image = this.FindControl<Image>("SummaryImage");
+
+        textBlock.Text = summaryText;
+
+        try
         {
-            Source = bitmap,
-            Width = 200,
-            Height = 200,
-            Margin = new Avalonia.Thickness(0, 10, 0, 10),
-            Stretch = Avalonia.Media.Stretch.Uniform
-        });
+            var uri = new Uri(imagePath);
+            using var stream = AssetLoader.Open(uri);
+            var bitmap = new Bitmap(stream);
+            image.Source = bitmap;
+        }
+        catch (Exception e)
+        {
+            textBlock.Text += $"\n\n[Nie udało się załadować obrazu: {e.Message}]";
+        }
     }
 }

@@ -1,14 +1,37 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="travelPlaner.SummaryWindow"
-        Title="SummaryWindow">
-    
-    
-    <StackPanel Margin="20" x:Name="SummaryStackPanel" Orientation="Vertical"/>
-    
-    
-    
+        Title="Podsumowanie podróży"
+        Width="700" Height="500"
+        Background="#E0F7FA">
+
+    <Border CornerRadius="10" Background="White" Margin="20" Padding="20" BorderBrush="#B2DFDB" BorderThickness="1">
+        <Grid RowDefinitions="Auto, *" ColumnDefinitions="2*,3*">
+            
+            <!-- Nagłówek -->
+            <TextBlock Grid.ColumnSpan="2"
+                       Text="Podsumowanie Twojej podróży"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#00695C"
+                       Margin="0 0 0 20"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Obrazek -->
+            <Image x:Name="SummaryImage"
+                   Grid.Row="1" Grid.Column="0"
+                   Width="200" Height="200"
+                   Stretch="Uniform"
+                   Margin="10"/>
+
+            <!-- Tekst podsumowania -->
+            <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock x:Name="SummaryTextBlock"
+                           TextWrapping="Wrap"
+                           FontSize="16"
+                           Foreground="#004D40"/>
+            </ScrollViewer>
+
+        </Grid>
+    </Border>
 </Window>
